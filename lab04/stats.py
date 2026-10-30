@@ -16,5 +16,16 @@ def parse_record(line):
         'date': date
     }
 
-    
+def read_valid(lines):
+    valid_records = []
+    for line in lines:
+        if not line:
+            continue
+        try:
+            record = parse_record(line)
+            valid_records.append(record)
+        except ValueError:
+            continue
+    return valid_records
+
 
