@@ -3,16 +3,16 @@ def parse_record(line):
     if len(line) != 3:
         raise ValueError('полей не ровно 3')
     else:
-        city, temp_str, date = line
+        city, temperature_str, date = line
     if not city.strip() or not date.strip():
         raise ValueError('город или дата пустые')
     try:
-        temp = float(temp_str)
+        temperature = float(temperature_str)
     except ValueError:
         raise ValueError('температура не число')
     return {
         'city': city,
-        'temp': temp,
+        'temperature': temperature,
         'date': date
     }
 
@@ -33,7 +33,7 @@ def average_by_city(records):
     counts = {}
     for r in records:
         city = r['city']
-        totals[city] = totals.get(city, 0.0) + r['temp']
+        totals[city] = totals.get(city, 0.0) + r['temperature']
         counts[city] = counts.get(city, 0) + 1
     averages = {}
     for city in totals:
