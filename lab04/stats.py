@@ -8,6 +8,8 @@ def parse_record(line):
         raise ValueError('город или дата пустые')
     try:
         temperature = float(temperature_str)
+        if temperature < 0:
+            temperature = abs(temperature)
     except ValueError:
         raise ValueError('температура не число')
     return {
