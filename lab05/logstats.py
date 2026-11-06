@@ -30,3 +30,20 @@ def count_levels(lines):
         except ValueError:
             counts['BROKEN'] += 1
     return counts
+
+def top_errors(lines):
+    error_counts = {}
+    for line in lines:
+        cleaned = line.strip()
+        if not cleaned:
+            continue
+        try:
+            event = parse_event(cleaned)
+            if event['level'] == 'ERROR':
+                msg = event['message']
+                error_counts[msg] = error_counts.get(msg, 0) + 1
+        except ValueError:
+            continue
+
+    sorted_errors = sorted(error_counts.items(), key=lambda x: (-x, x))
+    return [list(item) for item in sorted_errors[:n]]
