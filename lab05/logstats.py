@@ -70,7 +70,7 @@ def format_report(counts, errors):
     report += '\nЧастые ошибки:\n'
 
     for error in errors:
-        report += '- ' + error[0] + ' - ' + str(error[1]) + '\n'
+        report += '- ' + error[0] + ' — ' + str(error[1]) + '\n'
 
     return report
 
