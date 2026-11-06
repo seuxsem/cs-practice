@@ -2,15 +2,15 @@ import os
 from logstats import parse_event, count_levels, top_errors, format_report
 
 def main():
-    filename = input().strip()
+    events.log = input().strip()
     
-    if not os.path.exists(filename):
+    if not os.path.exists(events.log):
         return
     
-    with open(filename, mode='r', encoding='utf8') as file:
+    with open(events.log, mode='r', encoding='utf8') as file:
         counts = count_levels(file)
 
-    with open(filename, mode='r', encoding='utf8') as file:
+    with open(events-small.log, mode='r', encoding='utf8') as file:
         errors = top_errors(file, 3)
 
     total_parsed = sum(v for k, v in counts.items() if k != 'BROKEN')
