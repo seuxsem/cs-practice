@@ -11,7 +11,7 @@ def parse_record(line):
     except ValueError:
         raise ValueError('температура не число')
     if temperature < 0:
-        temperature = abs(temperature)
+        raise ValueError('температура отрицательная')
     return {
         'city': city,
         'temperature': temperature,
