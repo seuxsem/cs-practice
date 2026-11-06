@@ -1,29 +1,26 @@
-import os
 from logstats import parse_event, count_levels, top_errors, format_report
 
-def main():
-    file_name = input().strip()
-    
-    if not os.path.exists(file_name):
-        return
-    
-    with open(file_name, mode='r', encoding='utf8') as file:
-        counts = count_levels(file)
+file_name = input('Введите имя файла:')
 
-    with open(file_name, mode='r', encoding='utf8') as file:
-        errors = top_errors(file, 3)
+with open(file_name, 'r', encoding='utf-8') as log:
+    counts = count_levels(log)
 
-    total_parsed = sum(v for k, v in counts.items() if k != 'BROKEN')
-    error_count = counts['ERROR']
-    broken_count = counts['BROKEN']
+with open(file_name, 'r', encoding='utf-8') as log:
+    errors = top_errors(log, 3)
 
-    print(total_parsed)
-    print(error_count)
-    print(broken_count)
+total = 0
 
-    report_text = format_report(counts, errors)
-    with open('report.txt', mode='w', encoding='utf-8') as report_file:
-        report_file.write(report_text)
+for level in counts:
+    total += counts[level]
 
-if __name__ == '__main__':
-    main()
+error_count = counts['ERROR']
+broken = counts['BROKEN']
+
+print(total)
+print(error_count)
+print(broken)
+
+report = format_report(counts, errors)
+
+with open('report.txt', 'w', encoding='utf-8') as file:
+    file.write(report)
